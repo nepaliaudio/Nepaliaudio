@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Language Course — Audio Companion</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #8B2D2D;
+            --deep-red: #6B1F1F;
+            --purple: #4A1A4A;
+            --deep-purple: #2D0F2D;
+            --gold: #D4A843;
+            --gold-light: #E8C97A;
+            --cream: #F5F0EB;
+            --white: #FFFFFF;
+            --text-dark: #2C1810;
+            --text-light: #8B7355;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(160deg, #8B2D2D 0%, #6B1F1F 30%, #4A1A4A 70%, #2D0F2D 100%);
+            min-height: 100vh;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .bg-decoration {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 169, 67, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-decoration-1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+        }
+
+        .bg-decoration-2 {
+            width: 400px;
+            height: 400px;
+            bottom: 100px;
+            left: -150px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0 50px;
+        }
+
+        .cefr-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--deep-red);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(212, 169, 67, 0.3);
+        }
+
+        .subtitle-nepali {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .levels-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0 40px;
+        }
+
+        .level-badge {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .level-badge:hover, .level-badge.active {
+            background: var(--gold);
+            color: var(--deep-red);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .level-badge .level-code {
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: var(--glass);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 8px;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-right: 10px;
+        }
+
+        .filter-btn {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gold);
+            color: var(--deep-red);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2), transparent);
+        }
+
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 100px;
+        }
+
+        .chapter-item {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .chapter-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(212, 169, 67, 0.3);
+            transform: translateX(5px);
+        }
+
+        .chapter-item.playing {
+            background: rgba(212, 169, 67, 0.15);
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(212, 169, 67, 0.1);
+        }
+
+        .chapter-number {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--deep-red);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .chapter-item.playing .chapter-number {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .chapter-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chapter-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chapter-meta {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .chapter-type {
+            display: inline-block;
+            background: rgba(212, 169, 67, 0.2);
+            color: var(--gold-light);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chapter-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .btn-icon:hover {
+            background: var(--gold);
+            color: var(--deep-red);
+            transform: scale(1.1);
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--deep-red);
+        }
+
+        .btn-play:hover {
+            box-shadow: 0 4px 15px rgba(212, 169, 67, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .global-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(45, 15, 45, 0.95), rgba(45, 15, 45, 0.98));
+            border-top: 1px solid rgba(212, 169, 67, 0.2);
+            padding: 20px 30px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+        }
+
+        .global-player.active {
+            display: flex;
+        }
+
+        .player-chapter-info {
+            min-width: 0;
+            width: 200px;
+        }
+
+        .player-chapter-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .player-chapter-title {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.95rem;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--gold-light);
+        }
+
+        .control-btn.main {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--deep-red);
+            font-size: 20px;
+        }
+
+        .control-btn.main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(212, 169, 67, 0.4);
+        }
+
+        .progress-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(212, 169, 67, 0.5);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .progress-bar:hover .progress-fill::after {
+            opacity: 1;
+        }
+
+        .time {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            min-width: 40px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .player-extras {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .volume-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .speed-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .speed-btn:hover {
+            background: var(--gold);
+            color: var(--deep-red);
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--deep-red);
+            padding: 16px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 1.8rem; }
+            .stats-bar { gap: 20px; padding: 20px; }
+            .stat-number { font-size: 1.6rem; }
+            .global-player { flex-wrap: wrap; padding: 15px; }
+            .player-chapter-info { width: 100%; text-align: center; }
+            .progress-area { order: 3; width: 100%; }
+            .player-extras { display: none; }
+            .filter-bar { justify-content: center; }
+        }
+
+        /* ---- Upload zone ---- */
+        .upload-zone {
+            border: 2px dashed rgba(212, 169, 67, 0.4);
+            border-radius: 18px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 28px 24px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--gold);
+            background: rgba(212, 169, 67, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .upload-zone .up-icon {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .upload-zone .up-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+
+        .upload-zone .up-sub {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.5;
+        }
+
+        .upload-zone .up-sub strong { color: var(--gold-light); font-weight: 600; }
+
+        .upload-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin: -14px 0 30px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.55);
+            flex-wrap: wrap;
+        }
+
+        .upload-meta .loaded-count { color: var(--gold-light); font-weight: 600; }
+
+        .clear-link {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .clear-link:hover { color: #ff8080; }
+
+        /* audio-ready dot on chapter number */
+        .chapter-number { position: relative; }
+        .ready-dot {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #4ade80;
+            border: 2px solid var(--deep-purple);
+            box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+        }
+
+        .chapter-item.no-audio { opacity: 0.72; }
+        .btn-play.disabled {
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.35);
+            cursor: default;
+        }
+        .btn-play.disabled:hover { box-shadow: none; transform: none; }
+        .btn-attach {
+            background: rgba(212, 169, 67, 0.18);
+            color: var(--gold-light);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 169, 67, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(212, 169, 67, 0.5); }
+    </style>
+</head>
+<body>
+
+    <div class="bg-decoration bg-decoration-1"></div>
+    <div class="bg-decoration bg-decoration-2"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="cefr-badge">CEFR Aligned • A1 — C2</div>
+            <div class="subtitle-nepali">नेपाली भाषा पाठ्यपुस्तक</div>
+            <h1 class="main-title">Nepali Language<br>Complete Course Book</h1>
+            <p class="tagline">From First Words to Full Mastery</p>
+        </div>
+
+        <div class="levels-bar">
+            <div class="level-badge active" onclick="filterLevel('all')"><span class="level-code">All</span> Levels</div>
+            <div class="level-badge" onclick="filterLevel('A1')"><span class="level-code">A1</span> Beginner</div>
+            <div class="level-badge" onclick="filterLevel('A2')"><span class="level-code">A2</span> Elementary</div>
+            <div class="level-badge" onclick="filterLevel('B1')"><span class="level-code">B1</span> Intermediate</div>
+            <div class="level-badge" onclick="filterLevel('B2')"><span class="level-code">B2</span> Upper-Intermediate</div>
+            <div class="level-badge" onclick="filterLevel('C1')"><span class="level-code">C1</span> Advanced</div>
+            <div class="level-badge" onclick="filterLevel('C2')"><span class="level-code">C2</span> Mastery</div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number" id="statUnits">15</div>
+                <div class="stat-label">Units</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statLessons">45</div>
+                <div class="stat-label">Lessons</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statDialogues">64</div>
+                <div class="stat-label">Dialogues</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statExercises">109</div>
+                <div class="stat-label">Exercises</div>
+            </div>
+        </div>
+
+        <div class="upload-zone" id="uploadZone">
+            <div class="up-icon">🎵</div>
+            <div class="up-title">Upload your audio files</div>
+            <div class="up-sub">
+                Drag &amp; drop audio here, or <strong>click to browse</strong>.<br>
+                Files fill empty chapters in order — or use the 📎 button on a chapter to attach a specific file.
+            </div>
+        </div>
+        <input type="file" id="bulkInput" accept="audio/*" multiple hidden>
+        <input type="file" id="singleInput" accept="audio/*" hidden>
+
+        <div class="upload-meta">
+            <span><span class="loaded-count" id="loadedCount">0</span> of <span id="totalCount">0</span> chapters have audio</span>
+            <button class="clear-link" id="clearBtn" hidden>Clear saved audio</button>
+        </div>
+
+        <div class="filter-bar">
+            <span class="filter-label">Filter by type:</span>
+            <button class="filter-btn active" onclick="filterType('all')">All</button>
+            <button class="filter-btn" onclick="filterType('Unit')">Units</button>
+            <button class="filter-btn" onclick="filterType('Lesson')">Lessons</button>
+            <button class="filter-btn" onclick="filterType('Dialogue')">Dialogues</button>
+            <button class="filter-btn" onclick="filterType('Exercise')">Exercises</button>
+        </div>
+
+        <div class="section-title" id="listTitle">All Chapters</div>
+        <div class="chapter-list" id="chapterList"></div>
+    </div>
+
+    <div class="global-player" id="globalPlayer">
+        <div class="player-chapter-info">
+            <div class="player-chapter-label">Now Playing</div>
+            <div class="player-chapter-title" id="playerTitle">Select a chapter</div>
+        </div>
+
+        <div class="player-controls">
+            <button class="control-btn" id="prevBtn" title="Previous">⏮</button>
+            <button class="control-btn main" id="playPauseBtn" title="Play/Pause">▶</button>
+            <button class="control-btn" id="nextBtn" title="Next">⏭</button>
+        </div>
+
+        <div class="progress-area">
+            <span class="time" id="currentTime">0:00</span>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="time" id="duration">0:00</span>
+        </div>
+
+        <div class="player-extras">
+            <div class="volume-wrap">
+                <span>🔊</span>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+            </div>
+            <button class="speed-btn" id="speedBtn">1.0x</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ============================================
+        // REPLACE THESE URLs WITH YOUR ACTUAL AUDIO URLs
+        // ============================================
+        // Host your audio files on Internet Archive, Google Drive, Cloudflare R2, etc.
+        // Then paste the direct links below.
+        
+        const chapters = [
+            // A1 - Beginner (Unit 1-3)
+            {
+                title: "Unit 1 - Greetings and Introductions",
+                url: "https://archive.org/download/sample-audio/greetings.mp3",
+                type: "Unit",
+                level: "A1"
+            },
+            {
+                title: "Lesson 1.1 - Namaste and Basic Greetings",
+                url: "https://archive.org/download/sample-audio/lesson1-1.mp3",
+                type: "Lesson",
+                level: "A1"
+            },
+            {
+                title: "Dialogue 1 - Meeting a Stranger",
+                url: "https://archive.org/download/sample-audio/dialogue1.mp3",
+                type: "Dialogue",
+                level: "A1"
+            },
+            {
+                title: "Exercise 1 - Pronunciation Practice",
+                url: "https://archive.org/download/sample-audio/exercise1.mp3",
+                type: "Exercise",
+                level: "A1"
+            },
+            {
+                title: "Lesson 1.2 - Introducing Yourself",
+                url: "https://archive.org/download/sample-audio/lesson1-2.mp3",
+                type: "Lesson",
+                level: "A1"
+            },
+            {
+                title: "Dialogue 2 - At the Market",
+                url: "https://archive.org/download/sample-audio/dialogue2.mp3",
+                type: "Dialogue",
+                level: "A1"
+            },
+            {
+                title: "Unit 2 - Family and Relationships",
+                url: "https://archive.org/download/sample-audio/unit2.mp3",
+                type: "Unit",
+                level: "A1"
+            },
+            {
+                title: "Lesson 2.1 - Family Members",
+                url: "https://archive.org/download/sample-audio/lesson2-1.mp3",
+                type: "Lesson",
+                level: "A1"
+            },
+            {
+                title: "Dialogue 3 - Talking About Family",
+                url: "https://archive.org/download/sample-audio/dialogue3.mp3",
+                type: "Dialogue",
+                level: "A1"
+            },
+            {
+                title: "Exercise 2 - Vocabulary Drill",
+                url: "https://archive.org/download/sample-audio/exercise2.mp3",
+                type: "Exercise",
+                level: "A1"
+            },
+            {
+                title: "Unit 3 - Numbers and Counting",
+                url: "https://archive.org/download/sample-audio/unit3.mp3",
+                type: "Unit",
+                level: "A1"
+            },
+            {
+                title: "Lesson 3.1 - Numbers 1-20",
+                url: "https://archive.org/download/sample-audio/lesson3-1.mp3",
+                type: "Lesson",
+                level: "A1"
+            },
+            {
+                title: "Dialogue 4 - Buying Vegetables",
+                url: "https://archive.org/download/sample-audio/dialogue4.mp3",
+                type: "Dialogue",
+                level: "A1"
+            },
+            {
+                title: "Exercise 3 - Number Practice",
+                url: "https://archive.org/download/sample-audio/exercise3.mp3",
+                type: "Exercise",
+                level: "A1"
+            },
+
+            // A2 - Elementary (Unit 4-6)
+            {
+                title: "Unit 4 - Daily Routine",
+                url: "https://archive.org/download/sample-audio/unit4.mp3",
+                type: "Unit",
+                level: "A2"
+            },
+            {
+                title: "Lesson 4.1 - Morning Routine Verbs",
+                url: "https://archive.org/download/sample-audio/lesson4-1.mp3",
+                type: "Lesson",
+                level: "A2"
+            },
+            {
+                title: "Dialogue 5 - Making Plans",
+                url: "https://archive.org/download/sample-audio/dialogue5.mp3",
+                type: "Dialogue",
+                level: "A2"
+            },
+            {
+                title: "Exercise 4 - Verb Conjugation",
+                url: "https://archive.org/download/sample-audio/exercise4.mp3",
+                type: "Exercise",
+                level: "A2"
+            },
+            {
+                title: "Unit 5 - Food and Dining",
+                url: "https://archive.org/download/sample-audio/unit5.mp3",
+                type: "Unit",
+                level: "A2"
+            },
+            {
+                title: "Lesson 5.1 - Restaurant Vocabulary",
+                url: "https://archive.org/download/sample-audio/lesson5-1.mp3",
+                type: "Lesson",
+                level: "A2"
+            },
+            {
+                title: "Dialogue 6 - Ordering Food",
+                url: "https://archive.org/download/sample-audio/dialogue6.mp3",
+                type: "Dialogue",
+                level: "A2"
+            },
+            {
+                title: "Exercise 5 - Food Names",
+                url: "https://archive.org/download/sample-audio/exercise5.mp3",
+                type: "Exercise",
+                level: "A2"
+            },
+            {
+                title: "Unit 6 - Transportation",
+                url: "https://archive.org/download/sample-audio/unit6.mp3",
+                type: "Unit",
+                level: "A2"
+            },
+            {
+                title: "Lesson 6.1 - Getting Around",
+                url: "https://archive.org/download/sample-audio/lesson6-1.mp3",
+                type: "Lesson",
+                level: "A2"
+            },
+            {
+                title: "Dialogue 7 - Taking a Taxi",
+                url: "https://archive.org/download/sample-audio/dialogue7.mp3",
+                type: "Dialogue",
+                level: "A2"
+            },
+            {
+                title: "Exercise 6 - Direction Words",
+                url: "https://archive.org/download/sample-audio/exercise6.mp3",
+                type: "Exercise",
+                level: "A2"
+            },
+
+            // B1 - Intermediate (Unit 7-9)
+            {
+                title: "Unit 7 - Past Experiences",
+                url: "https://archive.org/download/sample-audio/unit7.mp3",
+                type: "Unit",
+                level: "B1"
+            },
+            {
+                title: "Lesson 7.1 - Past Tense Forms",
+                url: "https://archive.org/download/sample-audio/lesson7-1.mp3",
+                type: "Lesson",
+                level: "B1"
+            },
+            {
+                title: "Dialogue 8 - Sharing Memories",
+                url: "https://archive.org/download/sample-audio/dialogue8.mp3",
+                type: "Dialogue",
+                level: "B1"
+            },
+            {
+                title: "Exercise 7 - Past Tense Drill",
+                url: "https://archive.org/download/sample-audio/exercise7.mp3",
+                type: "Exercise",
+                level: "B1"
+            },
+            {
+                title: "Unit 8 - Future Plans",
+                url: "https://archive.org/download/sample-audio/unit8.mp3",
+                type: "Unit",
+                level: "B1"
+            },
+            {
+                title: "Lesson 8.1 - Future Tense Construction",
+                url: "https://archive.org/download/sample-audio/lesson8-1.mp3",
+                type: "Lesson",
+                level: "B1"
+            },
+            {
+                title: "Dialogue 9 - Planning a Trip",
+                url: "https://archive.org/download/sample-audio/dialogue9.mp3",
+                type: "Dialogue",
+                level: "B1"
+            },
+            {
+                title: "Exercise 8 - Future Tense Practice",
+                url: "https://archive.org/download/sample-audio/exercise8.mp3",
+                type: "Exercise",
+                level: "B1"
+            },
+            {
+                title: "Unit 9 - Health and Body",
+                url: "https://archive.org/download/sample-audio/unit9.mp3",
+                type: "Unit",
+                level: "B1"
+            },
+            {
+                title: "Lesson 9.1 - At the Doctor",
+                url: "https://archive.org/download/sample-audio/lesson9-1.mp3",
+                type: "Lesson",
+                level: "B1"
+            },
+            {
+                title: "Dialogue 10 - Describing Symptoms",
+                url: "https://archive.org/download/sample-audio/dialogue10.mp3",
+                type: "Dialogue",
+                level: "B1"
+            },
+            {
+                title: "Exercise 9 - Body Parts Vocabulary",
+                url: "https://archive.org/download/sample-audio/exercise9.mp3",
+                type: "Exercise",
+                level: "B1"
+            },
+
+            // B2 - Upper-Intermediate (Unit 10-12)
+            {
+                title: "Unit 10 - Work and Career",
+                url: "https://archive.org/download/sample-audio/unit10.mp3",
+                type: "Unit",
+                level: "B2"
+            },
+            {
+                title: "Lesson 10.1 - Job Interview Skills",
+                url: "https://archive.org/download/sample-audio/lesson10-1.mp3",
+                type: "Lesson",
+                level: "B2"
+            },
+            {
+                title: "Dialogue 11 - Job Interview",
+                url: "https://archive.org/download/sample-audio/dialogue11.mp3",
+                type: "Dialogue",
+                level: "B2"
+            },
+            {
+                title: "Exercise 10 - Professional Vocabulary",
+                url: "https://archive.org/download/sample-audio/exercise10.mp3",
+                type: "Exercise",
+                level: "B2"
+            },
+            {
+                title: "Unit 11 - Culture and Society",
+                url: "https://archive.org/download/sample-audio/unit11.mp3",
+                type: "Unit",
+                level: "B2"
+            },
+            {
+                title: "Lesson 11.1 - Nepali Festivals",
+                url: "https://archive.org/download/sample-audio/lesson11-1.mp3",
+                type: "Lesson",
+                level: "B2"
+            },
+            {
+                title: "Dialogue 12 - Discussing Traditions",
+                url: "https://archive.org/download/sample-audio/dialogue12.mp3",
+                type: "Dialogue",
+                level: "B2"
+            },
+            {
+                title: "Exercise 11 - Cultural Terms",
+                url: "https://archive.org/download/sample-audio/exercise11.mp3",
+                type: "Exercise",
+                level: "B2"
+            },
+            {
+                title: "Unit 12 - News and Media",
+                url: "https://archive.org/download/sample-audio/unit12.mp3",
+                type: "Unit",
+                level: "B2"
+            },
+            {
+                title: "Lesson 12.1 - Reading News Headlines",
+                url: "https://archive.org/download/sample-audio/lesson12-1.mp3",
+                type: "Lesson",
+                level: "B2"
+            },
+            {
+                title: "Dialogue 13 - Discussing Current Events",
+                url: "https://archive.org/download/sample-audio/dialogue13.mp3",
+                type: "Dialogue",
+                level: "B2"
+            },
+            {
+                title: "Exercise 12 - Media Vocabulary",
+                url: "https://archive.org/download/sample-audio/exercise12.mp3",
+                type: "Exercise",
+                level: "B2"
+            },
+
+            // C1 - Advanced (Unit 13-14)
+            {
+                title: "Unit 13 - Literature and Poetry",
+                url: "https://archive.org/download/sample-audio/unit13.mp3",
+                type: "Unit",
+                level: "C1"
+            },
+            {
+                title: "Lesson 13.1 - Famous Nepali Poets",
+                url: "https://archive.org/download/sample-audio/lesson13-1.mp3",
+                type: "Lesson",
+                level: "C1"
+            },
+            {
+                title: "Dialogue 14 - Analyzing a Poem",
+                url: "https://archive.org/download/sample-audio/dialogue14.mp3",
+                type: "Dialogue",
+                level: "C1"
+            },
+            {
+                title: "Exercise 13 - Literary Devices",
+                url: "https://archive.org/download/sample-audio/exercise13.mp3",
+                type: "Exercise",
+                level: "C1"
+            },
+            {
+                title: "Unit 14 - Politics and Governance",
+                url: "https://archive.org/download/sample-audio/unit14.mp3",
+                type: "Unit",
+                level: "C1"
+            },
+            {
+                title: "Lesson 14.1 - Government Structure",
+                url: "https://archive.org/download/sample-audio/lesson14-1.mp3",
+                type: "Lesson",
+                level: "C1"
+            },
+            {
+                title: "Dialogue 15 - Political Discussion",
+                url: "https://archive.org/download/sample-audio/dialogue15.mp3",
+                type: "Dialogue",
+                level: "C1"
+            },
+            {
+                title: "Exercise 14 - Formal Register",
+                url: "https://archive.org/download/sample-audio/exercise14.mp3",
+                type: "Exercise",
+                level: "C1"
+            },
+
+            // C2 - Mastery (Unit 15)
+            {
+                title: "Unit 15 - Mastery and Fluency",
+                url: "https://archive.org/download/sample-audio/unit15.mp3",
+                type: "Unit",
+                level: "C2"
+            },
+            {
+                title: "Lesson 15.1 - Advanced Idioms",
+                url: "https://archive.org/download/sample-audio/lesson15-1.mp3",
+                type: "Lesson",
+                level: "C2"
+            },
+            {
+                title: "Dialogue 16 - Debating Complex Topics",
+                url: "https://archive.org/download/sample-audio/dialogue16.mp3",
+                type: "Dialogue",
+                level: "C2"
+            },
+            {
+                title: "Exercise 15 - Translation Mastery",
+                url: "https://archive.org/download/sample-audio/exercise15.mp3",
+                type: "Exercise",
+                level: "C2"
+            },
+            {
+                title: "Final Review - Complete Fluency Test",
+                url: "https://archive.org/download/sample-audio/final-review.mp3",
+                type: "Exercise",
+                level: "C2"
+            }
+        ];
+
+        // ============================================
+        // PLAYER LOGIC
+        // ============================================
+
+        const levelNames = {
+            A1: 'Beginner',
+            A2: 'Elementary',
+            B1: 'Intermediate',
+            B2: 'Upper-Intermediate',
+            C1: 'Advanced',
+            C2: 'Mastery'
+        };
+
+        // Give every chapter a stable id and clear the placeholder URLs —
+        // audio now comes from the files you upload below.
+        chapters.forEach((c, i) => { c.id = i; c.url = null; });
+
+        // In-memory map: chapter id -> { url (objectURL), name }
+        const audioStore = new Map();
+
+        // ---- Persistent storage (IndexedDB) so uploads survive a reload ----
+        let db = null;
+        function openDB() {
+            return new Promise((resolve) => {
+                try {
+                    const req = indexedDB.open('nepaliAudioPlayer', 1);
+                    req.onupgradeneeded = (e) => {
+                        e.target.result.createObjectStore('audio');
+                    };
+                    req.onsuccess = (e) => resolve(e.target.result);
+                    req.onerror = () => resolve(null);
+                } catch (err) { resolve(null); }
+            });
+        }
+        function dbPut(id, blob, name) {
+            if (!db) return;
+            try {
+                const tx = db.transaction('audio', 'readwrite');
+                tx.objectStore('audio').put({ blob, name }, id);
+            } catch (err) { /* storage unavailable — session only */ }
+        }
+        function dbClear() {
+            if (!db) return;
+            try { db.transaction('audio', 'readwrite').objectStore('audio').clear(); }
+            catch (err) {}
+        }
+        function dbLoadAll() {
+            return new Promise((resolve) => {
+                if (!db) return resolve();
+                try {
+                    const store = db.transaction('audio', 'readonly').objectStore('audio');
+                    const req = store.openCursor();
+                    req.onsuccess = (e) => {
+                        const cur = e.target.result;
+                        if (cur) {
+                            const { blob, name } = cur.value;
+                            audioStore.set(cur.key, { url: URL.createObjectURL(blob), name });
+                            cur.continue();
+                        } else { resolve(); }
+                    };
+                    req.onerror = () => resolve();
+                } catch (err) { resolve(); }
+            });
+        }
+
+        let currentIndex = -1;
+        let audio = new Audio();
+        let isPlaying = false;
+        let speed = 1.0;
+        let currentFilter = { level: 'all', type: 'all' };
+        let filteredChapters = [...chapters];
+
+        const globalPlayer = document.getElementById('globalPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const speedBtn = document.getElementById('speedBtn');
+        const playerTitle = document.getElementById('playerTitle');
+        const toast = document.getElementById('toast');
+        const chapterList = document.getElementById('chapterList');
+        const listTitle = document.getElementById('listTitle');
+        const uploadZone = document.getElementById('uploadZone');
+        const bulkInput = document.getElementById('bulkInput');
+        const singleInput = document.getElementById('singleInput');
+        const loadedCountEl = document.getElementById('loadedCount');
+        const totalCountEl = document.getElementById('totalCount');
+        const clearBtn = document.getElementById('clearBtn');
+        let attachTargetId = null;
+
+        // ---- Upload wiring ----
+        uploadZone.addEventListener('click', () => bulkInput.click());
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handleBulkFiles(e.dataTransfer.files);
+        });
+        bulkInput.addEventListener('change', (e) => {
+            handleBulkFiles(e.target.files);
+            bulkInput.value = '';
+        });
+        singleInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && attachTargetId !== null) attachFile(attachTargetId, file);
+            singleInput.value = '';
+            attachTargetId = null;
+        });
+        clearBtn.addEventListener('click', () => {
+            if (!confirm('Remove all uploaded audio from this player?')) return;
+            audioStore.forEach(v => URL.revokeObjectURL(v.url));
+            audioStore.clear();
+            dbClear();
+            if (isPlaying) pause();
+            currentIndex = -1;
+            globalPlayer.classList.remove('active');
+            updateLoadedMeta();
+            renderChapters();
+        });
+
+        function isAudioFile(f) {
+            return f.type.startsWith('audio/') || /\.(mp3|m4a|wav|ogg|oga|aac|flac|opus|webm)$/i.test(f.name);
+        }
+
+        function attachFile(chapterId, file) {
+            const old = audioStore.get(chapterId);
+            if (old) URL.revokeObjectURL(old.url);
+            audioStore.set(chapterId, { url: URL.createObjectURL(file), name: file.name });
+            dbPut(chapterId, file, file.name);
+            updateLoadedMeta();
+            renderChapters();
+        }
+
+        // Bulk: fill chapters that don't yet have audio, in book order.
+        function handleBulkFiles(fileList) {
+            const files = Array.from(fileList).filter(isAudioFile);
+            if (!files.length) { showToast('No audio files found.'); return; }
+            const empty = chapters.filter(c => !audioStore.has(c.id));
+            files.forEach((file, i) => {
+                if (i < empty.length) attachFileQuiet(empty[i].id, file);
+            });
+            const used = Math.min(files.length, empty.length);
+            updateLoadedMeta();
+            renderChapters();
+            if (files.length > empty.length) {
+                showToast(`Added ${used}. Every chapter now has audio.`);
+            } else {
+                showToast(`Added ${used} file${used === 1 ? '' : 's'}.`);
+            }
+        }
+
+        function attachFileQuiet(chapterId, file) {
+            const old = audioStore.get(chapterId);
+            if (old) URL.revokeObjectURL(old.url);
+            audioStore.set(chapterId, { url: URL.createObjectURL(file), name: file.name });
+            dbPut(chapterId, file, file.name);
+        }
+
+        function promptAttach(chapterId) {
+            attachTargetId = chapterId;
+            singleInput.click();
+        }
+
+        function updateLoadedMeta() {
+            loadedCountEl.textContent = audioStore.size;
+            totalCountEl.textContent = chapters.length;
+            clearBtn.hidden = audioStore.size === 0;
+        }
+
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('ended', () => {
+            const next = findNextPlayable(currentIndex);
+            if (next !== -1) playChapter(next);
+            else { isPlaying = false; updatePlayBtn(); }
+        });
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+        audio.addEventListener('error', () => {
+            showToast('Error loading audio. Check URL.');
+            isPlaying = false;
+            updatePlayBtn();
+        });
+
+        playPauseBtn.addEventListener('click', togglePlay);
+        prevBtn.addEventListener('click', () => {
+            const p = findPrevPlayable(currentIndex);
+            if (p !== -1) playChapter(p);
+        });
+        nextBtn.addEventListener('click', () => {
+            const n = findNextPlayable(currentIndex);
+            if (n !== -1) playChapter(n);
+        });
+
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) audio.currentTime = pos * audio.duration;
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+
+        speedBtn.addEventListener('click', () => {
+            const speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
+            const idx = speeds.indexOf(speed);
+            speed = speeds[(idx + 1) % speeds.length];
+            audio.playbackRate = speed;
+            speedBtn.textContent = speed.toFixed(1) + 'x';
+        });
+
+        function filterLevel(level) {
+            currentFilter.level = level;
+            document.querySelectorAll('.level-badge').forEach(b => b.classList.remove('active'));
+            event.target.closest('.level-badge').classList.add('active');
+            applyFilters();
+        }
+
+        function filterType(type) {
+            currentFilter.type = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            applyFilters();
+        }
+
+        function applyFilters() {
+            filteredChapters = chapters.filter(ch => {
+                const levelMatch = currentFilter.level === 'all' || ch.level === currentFilter.level;
+                const typeMatch = currentFilter.type === 'all' || ch.type === currentFilter.type;
+                return levelMatch && typeMatch;
+            });
+            
+            const levelText = currentFilter.level === 'all' ? 'All' : currentFilter.level;
+            const typeText = currentFilter.type === 'all' ? '' : ` • ${currentFilter.type}s`;
+            listTitle.textContent = `${levelText} Chapters${typeText} (${filteredChapters.length})`;
+            
+            renderChapters();
+        }
+
+        function renderChapters() {
+            if (!filteredChapters.length) {
+                chapterList.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🔍</div>
+                        <h3>No chapters match your filters</h3>
+                        <p>Try selecting a different level or type</p>
+                    </div>
+                `;
+                return;
+            }
+
+            chapterList.innerHTML = filteredChapters.map((ch, i) => {
+                const entry = audioStore.get(ch.id);
+                const hasAudio = !!entry;
+                return `
+                <div class="chapter-item ${i === currentIndex ? 'playing' : ''} ${hasAudio ? '' : 'no-audio'}" onclick="playChapter(${i})">
+                    <div class="chapter-number">${i + 1}${hasAudio ? '<span class="ready-dot" title="Audio loaded"></span>' : ''}</div>
+                    <div class="chapter-info">
+                        <div class="chapter-title">${escapeHtml(ch.title)}</div>
+                        <div class="chapter-meta">
+                            <span class="chapter-type">${ch.type}</span>
+                            <span>${ch.level} • ${levelNames[ch.level] || ''}</span>
+                            ${hasAudio ? `<span title="${escapeHtml(entry.name)}">🎵 ${escapeHtml(entry.name)}</span>` : '<span>No audio yet</span>'}
+                        </div>
+                    </div>
+                    <div class="chapter-actions" onclick="event.stopPropagation()">
+                        <button class="btn-icon btn-play ${hasAudio ? '' : 'disabled'}" onclick="playChapter(${i})" title="${hasAudio ? 'Play' : 'Upload audio first'}">
+                            ${i === currentIndex && isPlaying ? '⏸' : '▶'}
+                        </button>
+                        <button class="btn-icon btn-attach" onclick="promptAttach(${ch.id})" title="${hasAudio ? 'Replace audio' : 'Attach audio file'}">📎</button>
+                        ${hasAudio ? `<a href="${entry.url}" download="${escapeHtml(entry.name)}" class="btn-icon" title="Download audio">⬇</a>` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function findNextPlayable(fromIndex) {
+            for (let i = fromIndex + 1; i < filteredChapters.length; i++) {
+                if (audioStore.has(filteredChapters[i].id)) return i;
+            }
+            return -1;
+        }
+        function findPrevPlayable(fromIndex) {
+            for (let i = fromIndex - 1; i >= 0; i--) {
+                if (audioStore.has(filteredChapters[i].id)) return i;
+            }
+            return -1;
+        }
+
+        function playChapter(index) {
+            if (index < 0 || index >= filteredChapters.length) return;
+            const ch = filteredChapters[index];
+            const entry = audioStore.get(ch.id);
+
+            if (!entry) {
+                showToast('No audio yet — tap 📎 to attach a file.');
+                return;
+            }
+
+            if (currentIndex === index && isPlaying) {
+                pause();
+                return;
+            }
+
+            if (currentIndex !== index) {
+                audio.src = entry.url;
+                audio.playbackRate = speed;
+                currentIndex = index;
+                playerTitle.textContent = `Ch. ${index + 1}: ${ch.title}`;
+            }
+
+            audio.play().catch(err => {
+                showToast('Cannot play this file.');
+                console.error(err);
+            });
+            isPlaying = true;
+            globalPlayer.classList.add('active');
+            updatePlayBtn();
+            renderChapters();
+        }
+
+        function togglePlay() {
+            if (currentIndex === -1) {
+                const first = findNextPlayable(-1);
+                if (first !== -1) playChapter(first);
+                else showToast('Upload some audio to start playing.');
+                return;
+            }
+            if (isPlaying) pause();
+            else {
+                audio.play();
+                isPlaying = true;
+                updatePlayBtn();
+                renderChapters();
+            }
+        }
+
+        function pause() {
+            audio.pause();
+            isPlaying = false;
+            updatePlayBtn();
+            renderChapters();
+        }
+
+        function updatePlayBtn() {
+            playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+        }
+
+        function updateProgress() {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = pct + '%';
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+        }
+
+        function formatTime(s) {
+            if (isNaN(s)) return '0:00';
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m}:${sec.toString().padStart(2, '0')}`;
+        }
+
+        function escapeHtml(t) {
+            const d = document.createElement('div');
+            d.textContent = t;
+            return d.innerHTML;
+        }
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            switch(e.code) {
+                case 'Space':
+                    e.preventDefault();
+                    togglePlay();
+                    break;
+                case 'ArrowLeft':
+                    if (audio.duration) audio.currentTime = Math.max(0, audio.currentTime - 10);
+                    break;
+                case 'ArrowRight':
+                    if (audio.duration) audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+                    break;
+                case 'ArrowUp':
+                    audio.volume = Math.min(1, audio.volume + 0.1);
+                    volumeSlider.value = audio.volume * 100;
+                    break;
+                case 'ArrowDown':
+                    audio.volume = Math.max(0, audio.volume - 0.1);
+                    volumeSlider.value = audio.volume * 100;
+                    break;
+            }
+        });
+
+        // Initialize: open storage, restore any previously uploaded audio, then render.
+        (async function init() {
+            totalCountEl.textContent = chapters.length;
+            renderChapters();
+            db = await openDB();
+            await dbLoadAll();
+            updateLoadedMeta();
+            renderChapters();
+        })();
+    </script>
+
+</body>
+</html>
